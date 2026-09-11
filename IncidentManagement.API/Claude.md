@@ -6,7 +6,7 @@ Asp.Net Api project with Clean Architecture for a Incident Management System. Th
 
 ## Tech Stack
 - ASP.NET Core MVC, .Net 10
-- Entity Framework Core + SQL Server (Server Name: localhost\\MSSQLSERVER01, Database Name: MyTodoDB_GenerateClaudeMdByOwn)
+- Entity Framework Core + SQL Server (Server Name: localhost\\MSSQLSERVER01, Database Name: IncidentManagementDB)
 
 
 ## Project Structure
