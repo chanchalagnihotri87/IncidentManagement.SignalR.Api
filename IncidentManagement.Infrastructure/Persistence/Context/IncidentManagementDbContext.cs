@@ -1,7 +1,7 @@
 using IncidentManagement.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace IncidentManagement.Infrastructure.Persistence;
+namespace IncidentManagement.Infrastructure.Persistence.Context;
 
 /// <summary>
 /// EF Core context for IncidentManagementDB (SQL Server).
@@ -20,6 +20,8 @@ public class IncidentManagementDbContext : DbContext
     public DbSet<Service> Services => Set<Service>();
 
     public DbSet<Team> Teams => Set<Team>();
+
+    public DbSet<TeamMember> TeamMembers => Set<TeamMember>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

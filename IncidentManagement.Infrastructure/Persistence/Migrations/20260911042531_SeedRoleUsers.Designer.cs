@@ -4,6 +4,7 @@ using IncidentManagement.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IncidentManagement.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(IncidentManagementDbContext))]
-    partial class IncidentManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260911042531_SeedRoleUsers")]
+    partial class SeedRoleUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -175,42 +178,6 @@ namespace IncidentManagement.Infrastructure.Persistence.Migrations
                     b.ToTable("Teams", (string)null);
                 });
 
-            modelBuilder.Entity("IncidentManagement.Domain.Entities.TeamMember", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid>("TeamId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("UpdatedAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("TeamId", "UserId")
-                        .IsUnique();
-
-                    b.ToTable("TeamMembers", (string)null);
-                });
-
             modelBuilder.Entity("IncidentManagement.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -321,30 +288,6 @@ namespace IncidentManagement.Infrastructure.Persistence.Migrations
                     b.Navigation("Service");
 
                     b.Navigation("Team");
-                });
-
-            modelBuilder.Entity("IncidentManagement.Domain.Entities.TeamMember", b =>
-                {
-                    b.HasOne("IncidentManagement.Domain.Entities.Team", "Team")
-                        .WithMany("Members")
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("IncidentManagement.Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Team");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("IncidentManagement.Domain.Entities.Team", b =>
-                {
-                    b.Navigation("Members");
                 });
 #pragma warning restore 612, 618
         }

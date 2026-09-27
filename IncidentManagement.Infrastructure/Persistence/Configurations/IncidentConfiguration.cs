@@ -58,12 +58,6 @@ public class IncidentConfiguration : IEntityTypeConfiguration<Incident>
             .HasMaxLength(50)
             .IsRequired();
 
-        builder.Property(i => i.CreatedDate)
-            .IsRequired();
-
-        builder.Property(i => i.UpdatedDate)
-            .IsRequired();
-
         builder.HasOne(i => i.Service)
             .WithMany()
             .HasForeignKey(i => i.ServiceId)

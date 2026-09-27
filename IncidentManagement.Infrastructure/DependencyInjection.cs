@@ -1,6 +1,8 @@
 using IncidentManagement.Application.Common.Interfaces;
+using IncidentManagement.Domain.Entities;
 using IncidentManagement.Infrastructure.Authentication;
-using IncidentManagement.Infrastructure.Persistence;
+using IncidentManagement.Infrastructure.Persistence.Context;
+using IncidentManagement.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +24,10 @@ public static class DependencyInjection
             options.UseSqlServer(connectionString));
 
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IIncidentRepository, IncidentRepository>();
+        services.AddScoped<IServiceRepository, ServiceRepository>();
+        services.AddScoped<ITeamRepository, TeamRepository>();
+        services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
 
         var jwtSettings = new JwtSettings
         {

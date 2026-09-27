@@ -1,12 +1,11 @@
-﻿using IncidentManagement.Domain.Enums;
+﻿using IncidentManagement.Domain.Common;
+using IncidentManagement.Domain.Enums;
 using System;
 
 namespace IncidentManagement.Domain.Entities
 {
-    public class Incident
+    public class Incident : BaseEntity
     {
-        public long Id { get; set; }
-
         public Guid PublicId { get; set; }
 
         public string IncidentNumber { get; set; } = null!;
@@ -32,10 +31,6 @@ namespace IncidentManagement.Domain.Entities
         public Guid? AssigneeId { get; set; }
 
         public Guid TeamId { get; set; }
-
-        public DateTime CreatedDate { get; set; }
-
-        public DateTime UpdatedDate { get; set; }
 
         public DateTime? ResolvedDate { get; set; }
 

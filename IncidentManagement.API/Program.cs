@@ -1,6 +1,7 @@
 using IncidentManagement.API;
 using IncidentManagement.Application;
 using IncidentManagement.Infrastructure;
+using IncidentManagement.API.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,20 @@ builder.Services.AddWebApiServices();
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
+
+builder.Services.AddSignalR();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ReactClient", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
 
 var app = builder.Build();
 
@@ -26,5 +41,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<IncidentHub>("/hubs/incidents");
 
 app.Run();
